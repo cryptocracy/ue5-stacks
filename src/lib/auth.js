@@ -144,7 +144,7 @@ export function authenticate() {
                         }
                     }
                 });
-                
+
                 let config = { method: 'post', maxBodyLength: Infinity, url: 'http://127.0.0.1:8080', headers: { 'Content-Type': 'application/json' }, data: data };
                 axios.request(config)
                     .then((response) => {
@@ -185,7 +185,7 @@ export function authenticate() {
                 console.log(error);
             }).finally(() => {
                 console.log('done')
-                // window.close();
+                window.close();
             });
     }
 }
