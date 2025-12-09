@@ -48,6 +48,8 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('window', { window });
+    if (!window) return;
     // Don't proceed if provider is not ready or still loading
     if (isLoading || !providerReady) return;
 
@@ -93,7 +95,7 @@ function App() {
         break;
     }
     setAuthState(isAuthed);
-  }, [userSession, isLoading, providerReady]);
+  }, [userSession, isLoading, providerReady, window]);
 
   useEffect(() => {
     if (isDefault) {
