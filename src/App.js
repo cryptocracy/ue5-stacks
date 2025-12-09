@@ -55,13 +55,19 @@ function App() {
     const payLoad = params.get("payload");
 
     console.log('payLoad', { payLoad });
-    if (!payLoad) return;
+    if (!payLoad) {
+      setAuthState(isAuthed);
+      setIsDefault(true);
+      return
+    };
 
     const rePayload = JSON.parse(decodeURIComponent(payLoad));
-    console.log('payLoad', { payLoad, rePayload });
+    console.log('payLoad', { payLoad, rePayload, userSession: isAuthed ? userSession?.loadUserData()?.profile?.stxAddress?.['mainnet'] : 'not authed' });
 
     if (typeof rePayload !== 'object' || rePayload === null) {
       // window.close();
+      setAuthState(isAuthed);
+      setIsDefault(true);
       return;
     }
 
@@ -82,10 +88,21 @@ function App() {
         sendRequest(rePayload);
         break;
       default:
+        console.log('default');
+        setIsDefault(true)
         break;
     }
     setAuthState(isAuthed);
   }, [userSession, isLoading, providerReady]);
+
+  useEffect(() => {
+    if (isDefault) {
+      return;
+    }
+    console.log('isDefault', { isDefault });
+  }, [isDefault]);
+
+  console.log({ isDefault });
 
   return (
     <HeroUIProvider className="h-full w-full flex flex-col items-center justify-center bg-blue-500">
@@ -99,9 +116,9 @@ function App() {
       </div>
 
       {isDefault && (
-        <Chip color={isAuthed ? 'success' : 'warning'} variant="dot" style={{ borderColor: '#5166f5', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button variant="null" onPress={isAuthed ? deAuthenticate : authenticate} size="sm" style={{ color: "#ff7a00" }}>
-            {isAuthed ? "Disconnect" : "Connect"}
+        <Chip color={authState ? 'success' : 'warning'} variant="dot" style={{ borderColor: '#5166f5', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onPress={authState ? deAuthenticate : authenticate} size="sm" style={{ color: "#ff7a00" }}>
+            {authState ? "Disconnect" : "Connect"}
           </Button>
         </Chip>
       )}

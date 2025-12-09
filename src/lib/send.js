@@ -26,7 +26,7 @@ export function sendRequest(payload) {
     const tokenContract = payload?.tokenContract;
     const nftContract = payload?.nftContract;
 
-    console.log({ from, to, amount, memo, nftId, tokenContract, nftContract });
+    console.log({ payload });
 
     if (from !== userAddress) {
         console.error('From address is not the authenticated user address');
@@ -56,7 +56,7 @@ function sendStx(from, to, amount, memo) {
     console.log({ provider });
     openSTXTransfer({
         network: STACKS_MAINNET,
-        amount: +amount * 1000000,
+        amount: +amount,
         sender: from,
         recipient: to,
         memo: memo,

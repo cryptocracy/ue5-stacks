@@ -185,7 +185,7 @@ export function authenticate() {
                 console.log(error);
             }).finally(() => {
                 console.log('done')
-                window.close();
+                // window.close();
             });
     }
 }
