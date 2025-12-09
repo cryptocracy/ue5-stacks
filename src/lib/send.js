@@ -66,7 +66,7 @@ function sendStx(from, to, amount, memo) {
         onCancel: () => {
             window.close();
         }
-    }, provider)
+    })
 }
 
 function sendFungible(tokenContract, from, to, amount, memo) {
@@ -93,7 +93,7 @@ function sendFungible(tokenContract, from, to, amount, memo) {
         onCancel: () => {
             window.close();
         }
-    }, provider)
+    })
 }
 
 function sendNonFungible(nftContract, from, to, nftId, memo) {
@@ -120,5 +120,5 @@ function sendNonFungible(nftContract, from, to, nftId, memo) {
         onCancel: () => {
             window.close();
         }
-    }, provider)
+    })
 }
