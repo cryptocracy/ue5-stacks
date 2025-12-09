@@ -28,7 +28,7 @@ export function sendRequest(payload) {
 
     if (from !== userAddress) {
         console.error('From address is not the authenticated user address');
-        window.close();
+        // window.close();
         return;
     }
 
@@ -44,7 +44,7 @@ export function sendRequest(payload) {
             break;
         default:
             console.error('Invalid payload request', { payload });
-            window.close();
+            // window.close();
             break;
     }
 }
