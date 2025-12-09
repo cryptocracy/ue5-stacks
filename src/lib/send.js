@@ -26,6 +26,8 @@ export function sendRequest(payload) {
     const tokenContract = payload?.tokenContract;
     const nftContract = payload?.nftContract;
 
+    console.log({ from, to, amount, memo, nftId, tokenContract, nftContract });
+
     if (from !== userAddress) {
         console.error('From address is not the authenticated user address');
         // window.close();
@@ -51,6 +53,7 @@ export function sendRequest(payload) {
 
 function sendStx(from, to, amount, memo) {
     const provider = getWalletConnectedProvider();
+    console.log({ provider });
     openSTXTransfer({
         network: STACKS_MAINNET,
         amount: +amount * 1000000,
@@ -68,6 +71,7 @@ function sendStx(from, to, amount, memo) {
 
 function sendFungible(tokenContract, from, to, amount, memo) {
     const provider = getWalletConnectedProvider();
+    console.log({ provider });
     openContractCall({
         network: STACKS_MAINNET,
         contractAddress: tokenContract.split('.')[0],
@@ -94,6 +98,7 @@ function sendFungible(tokenContract, from, to, amount, memo) {
 
 function sendNonFungible(nftContract, from, to, nftId, memo) {
     const provider = getWalletConnectedProvider();
+    console.log({ provider });
     openContractCall({
         network: STACKS_MAINNET,
         contractAddress: nftContract.split('.')[0],
