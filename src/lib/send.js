@@ -44,7 +44,7 @@ export function sendRequest(payload) {
             break;
         default:
             console.error('Invalid payload request', { payload });
-            window.close();
+            //window.close();
             break;
     }
 }
